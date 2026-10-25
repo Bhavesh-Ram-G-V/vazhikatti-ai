@@ -143,65 +143,65 @@ export const VoiceMicInput: React.FC<VoiceMicInputProps> = ({
   };
 
   return (
-    <div className="w-full bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#dfc0b7] shadow-sm mb-8">
-      <div className="text-center max-w-xl mx-auto mb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fbf2ed] text-[#a43716] font-bold text-xs sm:text-sm mb-3 border border-[#dfc0b7]">
-          <Sparkles className="w-4 h-4" />
-          <span>குரல் மூலம் பேசுங்கள் (Speak in Tamil)</span>
+    <div className="w-full bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border sm:border-2 border-[#dfc0b7] shadow-xs sm:shadow-sm mb-4 sm:mb-6">
+      <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6">
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#fbf2ed] text-[#a43716] font-bold text-[11px] sm:text-xs mb-2 border border-[#dfc0b7]">
+          <Sparkles className="w-3 h-3" />
+          <span>குரல் வழி உள்ளீடு (Voice Tamil)</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1f1b18] mb-2">
+        <h2 className="text-lg sm:text-2xl font-black text-[#1f1b18] mb-1 leading-snug">
           உங்கள் நிலைமையை தமிழில் பேசுங்கள்
         </h2>
-        <p className="text-base sm:text-lg text-[#58423c]">
-          எழுத்து படிக்கத் தெரியாவிட்டாலும் பரவாயில்லை! மைக்கை அழுத்தி உங்கள் வயது, குடும்ப நிலை மற்றும் தேவையை தமிழில் பேசவும்.
+        <p className="text-xs sm:text-sm text-[#58423c] leading-relaxed">
+          படிக்கத் தெரியாவிட்டாலும் பரவாயில்லை! மைக்கை அழுத்தி உங்கள் வயது, குடும்ப நிலை மற்றும் தேவையை தமிழில் பேசவும்.
         </p>
       </div>
 
       {/* Big Tactile Pulsing Record Button */}
-      <div className="flex flex-col items-center justify-center py-4">
+      <div className="flex flex-col items-center justify-center py-2 sm:py-3">
         {isRecording ? (
           <button
             onClick={stopRecording}
             aria-label="பதிவை நிறுத்த அழுத்துங்கள்"
-            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#ba1a1a] text-white flex flex-col items-center justify-center shadow-lg transition-transform active:scale-95 breathing-glow border-4 border-white"
+            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#ba1a1a] text-white flex flex-col items-center justify-center shadow-md transition-transform active:scale-95 breathing-glow border-3 border-white"
           >
-            <Square className="w-10 h-10 mb-1" />
-            <span className="text-sm font-black tracking-wider">நிறுத்து ({recordingSeconds}s)</span>
+            <Square className="w-7 h-7 sm:w-9 sm:h-9 mb-0.5" />
+            <span className="text-xs font-black tracking-wider">நிறுத்து ({recordingSeconds}s)</span>
           </button>
         ) : (
           <button
             onClick={startRecording}
             disabled={isTranscribing || isLoading}
             aria-label="தமிழில் பேச மைக்ரோஃபோனை அழுத்துங்கள்"
-            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#d95d39] text-white flex flex-col items-center justify-center shadow-xl transition-all hover:bg-[#a43716] active:translate-y-1 breathing-glow border-4 border-white disabled:opacity-50"
+            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#d95d39] text-white flex flex-col items-center justify-center shadow-lg transition-all hover:bg-[#a43716] active:translate-y-1 breathing-glow border-3 sm:border-4 border-white disabled:opacity-50"
           >
             {isTranscribing ? (
               <>
-                <Loader2 className="w-10 h-10 animate-spin mb-1" />
-                <span className="text-xs font-bold">புரிந்துகொள்கிறது...</span>
+                <Loader2 className="w-7 h-7 sm:w-9 sm:h-9 animate-spin mb-0.5" />
+                <span className="text-[10px] sm:text-xs font-bold">கேட்கிறது...</span>
               </>
             ) : (
               <>
-                <Mic className="w-12 h-12 mb-1" />
-                <span className="text-sm font-black">பேச தொடங்கு</span>
+                <Mic className="w-8 h-8 sm:w-10 sm:h-10 mb-0.5" />
+                <span className="text-xs sm:text-sm font-black">பேச தொடங்கு</span>
               </>
             )}
           </button>
         )}
 
-        <p className="mt-4 text-sm font-semibold text-[#58423c]">
+        <p className="mt-3 text-xs sm:text-sm font-semibold text-[#58423c] text-center px-2">
           {isRecording
-            ? '🔴 மைக் இயங்குகிறது... பேசி முடித்ததும் மேலே உள்ள சிவப்பு பொத்தானை அழுத்தவும்'
+            ? '🔴 மைக் இயங்குகிறது... பேசி முடித்ததும் சிவப்பு பொத்தானை அழுத்தவும்'
             : isTranscribing
-            ? '✨ Gemma 4 குரல் கேட்கிறது... தயவுசெய்து ஒரு நொடி காத்திருக்கவும்'
+            ? '✨ Gemma 4 31B IT குரல் கேட்கிறது... காத்திருக்கவும்'
             : '👆 மைக்கை ஒருமுறை தொட்டு பேசத் தொடங்கவும்'}
         </p>
       </div>
 
       {/* Error message if any */}
       {errorMessage && (
-        <div className="mt-4 p-4 rounded-2xl bg-[#ffdad6] text-[#93000a] text-sm font-semibold flex items-start gap-3 border border-[#ba1a1a]/30">
-          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+        <div className="mt-3 p-3 rounded-xl bg-[#ffdad6] text-[#93000a] text-xs sm:text-sm font-semibold flex items-start gap-2 border border-[#ba1a1a]/30">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <div className="flex-1">
             <p>{errorMessage}</p>
           </div>
@@ -209,24 +209,24 @@ export const VoiceMicInput: React.FC<VoiceMicInputProps> = ({
       )}
 
       {/* Quick Suggested Tamil Voice Scenarios */}
-      <div className="mt-8 pt-6 border-t border-[#f0e6e1]">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#58423c]">
+      <div className="mt-5 pt-4 border-t border-[#f0e6e1]">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#58423c]">
             அல்லது ஒருமுறை தொட்டு தெரிந்து கொள்ள மாதிரி சூழல்கள்:
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
           {samplePrompts.map((p, idx) => (
             <button
               key={idx}
               onClick={() => onTranscriptionComplete(p.text)}
-              className="tactile-button text-left p-3.5 rounded-2xl bg-[#fff8f5] hover:bg-[#fbf2ed] border-2 border-[#dfc0b7] transition-all flex flex-col justify-between"
+              className="tactile-button text-left p-2.5 sm:p-3 rounded-xl bg-[#fff8f5] hover:bg-[#fbf2ed] border border-[#dfc0b7] transition-all flex flex-col justify-between"
             >
-              <span className="text-sm font-bold text-[#a43716] flex items-center gap-1.5 mb-1">
-                <Sparkles className="w-3.5 h-3.5" /> {p.title}
+              <span className="text-xs sm:text-sm font-bold text-[#a43716] flex items-center gap-1 mb-0.5">
+                <Sparkles className="w-3 h-3 shrink-0" /> {p.title}
               </span>
-              <span className="text-xs text-[#58423c] line-clamp-2">
+              <span className="text-[11px] sm:text-xs text-[#58423c] line-clamp-2">
                 "{p.text}"
               </span>
             </button>
@@ -236,3 +236,4 @@ export const VoiceMicInput: React.FC<VoiceMicInputProps> = ({
     </div>
   );
 };
+

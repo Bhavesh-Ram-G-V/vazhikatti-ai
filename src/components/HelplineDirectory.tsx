@@ -67,42 +67,40 @@ export const HelplineDirectory: React.FC<HelplineDirectoryProps> = ({ isOpen, on
   ];
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto border-4 border-[#dfc0b7] shadow-2xl p-6 sm:p-8">
-        <div className="flex items-center justify-between pb-4 border-b border-[#f0e6e1]">
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto border-2 sm:border-4 border-[#dfc0b7] shadow-2xl p-4 sm:p-7">
+        <div className="flex items-center justify-between pb-3 border-b border-[#f0e6e1]">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-[#1f1b18]">
+            <h2 className="text-base sm:text-2xl font-black text-[#1f1b18]">
               📞 தமிழ்நாடு அரசு இலவச உதவி எண்கள்
             </h2>
-            <p className="text-xs sm:text-sm text-[#58423c]">
-              எந்த கட்டணமும் இன்றி உங்கள் தொலைபேசியில் இருந்து நேரடியாக அழைக்கலாம்.
+            <p className="text-[11px] sm:text-xs text-[#58423c]">
+              கட்டணமில்லா எண்கள் - நேரடியாக அழைக்கலாம்.
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="மூடு"
-            className="w-10 h-10 rounded-full bg-[#f5ece7] text-[#1f1b18] hover:bg-[#eae1dc] flex items-center justify-center font-bold"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#f5ece7] text-[#1f1b18] hover:bg-[#eae1dc] flex items-center justify-center font-bold shrink-0 ml-2"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
-        <div className="divide-y divide-[#f0e6e1] mt-4">
+        <div className="divide-y divide-[#f0e6e1] mt-2 sm:mt-4">
           {helplines.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="py-4 flex items-start justify-between gap-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#fbf2ed] text-[#d95d39] flex items-center justify-center shrink-0 mt-1">
-                    <Icon className="w-5 h-5" />
+              <div key={idx} className="py-2.5 sm:py-4 flex items-start justify-between gap-3">
+                <div className="flex items-start gap-2.5 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#fbf2ed] text-[#d95d39] flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-extrabold text-[#1f1b18] text-base sm:text-lg">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#58423c] mt-0.5">
+                  <div className="min-w-0">
+                    <h3 className="font-extrabold text-[#1f1b18] text-xs sm:text-base leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="text-[11px] sm:text-xs text-[#58423c] mt-0.5 line-clamp-2">
                       {item.desc}
                     </p>
                   </div>
@@ -110,9 +108,9 @@ export const HelplineDirectory: React.FC<HelplineDirectoryProps> = ({ isOpen, on
 
                 <a
                   href={`tel:${item.number.replace(/\s+/g, '')}`}
-                  className="tactile-button shrink-0 flex items-center gap-2 px-4 py-2 rounded-full bg-[#2b8282] text-white font-extrabold text-sm sm:text-base hover:bg-[#006a6a] shadow-sm"
+                  className="tactile-button shrink-0 flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#2b8282] text-white font-extrabold text-xs sm:text-sm hover:bg-[#006a6a] shadow-xs"
                 >
-                  <Phone className="w-4 h-4 fill-white" />
+                  <Phone className="w-3.5 h-3.5 fill-white" />
                   <span>{item.number}</span>
                 </a>
               </div>
@@ -120,10 +118,10 @@ export const HelplineDirectory: React.FC<HelplineDirectoryProps> = ({ isOpen, on
           })}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-[#f0e6e1] flex justify-end">
+        <div className="mt-4 pt-3 border-t border-[#f0e6e1] flex justify-end">
           <button
             onClick={onClose}
-            className="tactile-button px-6 py-2.5 rounded-full bg-[#d95d39] text-white font-bold text-sm shadow-md"
+            className="tactile-button px-5 py-2 rounded-full bg-[#d95d39] text-white font-bold text-xs sm:text-sm shadow-sm"
           >
             மூடு (Close)
           </button>

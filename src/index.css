@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 @layer base {
-  body {
+  html, body {
+    overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     font-family: 'Atkinson Hyperlegible', 'Noto Sans Tamil', system-ui, -apple-system, sans-serif;
     background-color: #fff8f5;
     color: #1f1b18;

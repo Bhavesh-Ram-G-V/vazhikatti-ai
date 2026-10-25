@@ -141,22 +141,22 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
   ];
 
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full space-y-4 sm:space-y-6">
       {/* Step 1: Who are you (Visual choice cards) */}
-      <section className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#eae1dc] shadow-sm">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-8 h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-sm border border-[#dfc0b7]">
+      <section className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border sm:border-2 border-[#eae1dc] shadow-xs sm:shadow-sm">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-xs sm:text-sm border border-[#dfc0b7] shrink-0">
             1
           </span>
-          <h2 className="text-xl sm:text-2xl font-black text-[#1f1b18]">
-            முதலில் உங்கள் முதன்மை நிலையைத் தேர்ந்தெடுக்கவும்
+          <h2 className="text-base sm:text-xl font-black text-[#1f1b18] leading-tight">
+            முதலில் நீங்கள் யார் என்பதைத் தொடவும்
           </h2>
         </div>
-        <p className="text-sm sm:text-base text-[#58423c] mb-6">
-          கீழே உள்ள பெரிய படக் கட்டங்களில் நீங்கள் யார் என்பதை ஒருமுறை தொடவும்.
+        <p className="text-xs sm:text-sm text-[#58423c] mb-3.5 sm:mb-5">
+          கீழே உள்ள படக் கட்டங்களில் பொருத்தமானதை ஒருமுறை தொடவும்.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3.5">
           {primaryIdentities.map((item) => {
             const Icon = item.icon;
             const active = item.isSelected(profile);
@@ -165,38 +165,39 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                 key={item.id}
                 type="button"
                 onClick={() => onChange(item.apply(profile))}
-                className={`tactile-button relative min-h-[110px] p-5 rounded-2xl border-3 text-left transition-all flex flex-col justify-between ${
+                className={`tactile-button relative min-h-[72px] sm:min-h-[105px] p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-left transition-all flex items-center sm:items-start justify-between gap-3 ${
                   active
-                    ? 'bg-[#2b8282] text-white border-[#006a6a] shadow-md'
+                    ? 'bg-[#2b8282] text-white border-[#006a6a] shadow-sm'
                     : 'bg-[#fff8f5] text-[#1f1b18] border-[#eae1dc] hover:border-[#dfc0b7] hover:bg-[#fbf2ed]'
                 }`}
               >
-                <div className="flex items-start justify-between w-full">
+                <div className="flex items-center sm:items-start gap-3 w-full">
                   <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 ${
                       active ? 'bg-white/20 text-white' : 'bg-[#f5ece7] text-[#d95d39]'
                     }`}
                   >
-                    <Icon className="w-7 h-7" />
+                    <Icon className="w-5 h-5 sm:w-7 sm:h-7" />
                   </div>
+
+                  <div className="flex-1 min-w-0">
+                    <span className="block text-sm sm:text-base font-bold leading-snug truncate sm:whitespace-normal">
+                      {item.labelTamil}
+                    </span>
+                    <span
+                      className={`block text-[11px] sm:text-xs mt-0.5 line-clamp-1 ${
+                        active ? 'text-white/80' : 'text-[#58423c]'
+                      }`}
+                    >
+                      {item.subtextTamil}
+                    </span>
+                  </div>
+
                   {active && (
-                    <div className="w-7 h-7 rounded-full bg-white text-[#2b8282] flex items-center justify-center font-bold shadow-sm">
-                      <Check className="w-5 h-5 stroke-[3]" />
+                    <div className="w-6 h-6 rounded-full bg-white text-[#2b8282] flex items-center justify-center font-bold shadow-xs shrink-0">
+                      <Check className="w-4 h-4 stroke-[3]" />
                     </div>
                   )}
-                </div>
-
-                <div className="mt-3">
-                  <span className="block text-base sm:text-lg font-bold leading-tight">
-                    {item.labelTamil}
-                  </span>
-                  <span
-                    className={`block text-xs mt-1 ${
-                      active ? 'text-white/80' : 'text-[#58423c]'
-                    }`}
-                  >
-                    {item.subtextTamil}
-                  </span>
                 </div>
               </button>
             );
@@ -205,37 +206,37 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
       </section>
 
       {/* Step 2: Age & Family Status */}
-      <section className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#eae1dc] shadow-sm">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-8 h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-sm border border-[#dfc0b7]">
+      <section className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border sm:border-2 border-[#eae1dc] shadow-xs sm:shadow-sm">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-xs sm:text-sm border border-[#dfc0b7] shrink-0">
             2
           </span>
-          <h2 className="text-xl sm:text-2xl font-black text-[#1f1b18]">
+          <h2 className="text-base sm:text-xl font-black text-[#1f1b18] leading-tight">
             வயது மற்றும் குடும்ப நிலை
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5 mt-3 sm:mt-5">
           {/* Age selector with big buttons */}
-          <div className="bg-[#fff8f5] p-5 rounded-2xl border-2 border-[#dfc0b7]">
-            <label className="block text-sm sm:text-base font-bold text-[#1f1b18] mb-3">
+          <div className="bg-[#fff8f5] p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-[#dfc0b7]">
+            <label className="block text-xs sm:text-sm font-bold text-[#1f1b18] mb-2">
               உங்கள் வயது (Age in years):
             </label>
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => onChange({ ...profile, age: Math.max(15, profile.age - 1) })}
                 aria-label="வயதை 1 குறைக்க"
-                className="tactile-button w-14 h-14 rounded-full bg-white border-2 border-[#dfc0b7] text-[#a43716] flex items-center justify-center hover:bg-[#fbf2ed] shadow-sm font-black text-2xl"
+                className="tactile-button w-12 h-12 rounded-full bg-white border border-[#dfc0b7] text-[#a43716] flex items-center justify-center hover:bg-[#fbf2ed] shadow-xs font-black text-xl"
               >
-                <Minus className="w-6 h-6 stroke-[3]" />
+                <Minus className="w-5 h-5 stroke-[3]" />
               </button>
 
-              <div className="flex-1 text-center bg-white py-3 px-4 rounded-2xl border-2 border-[#2b8282]">
-                <span className="text-3xl sm:text-4xl font-extrabold text-[#1f1b18]">
+              <div className="flex-1 text-center bg-white py-2 px-3 rounded-xl border border-[#2b8282]">
+                <span className="text-2xl sm:text-3xl font-black text-[#1f1b18]">
                   {profile.age}
                 </span>
-                <span className="block text-xs text-[#58423c] font-semibold mt-0.5">
+                <span className="block text-[10px] sm:text-xs text-[#58423c] font-semibold">
                   {profile.age >= 60 ? 'மூத்த குடிமக்கள்' : profile.age >= 21 ? 'குடும்பத் தலைமை' : 'இளைஞர்'}
                 </span>
               </div>
@@ -244,20 +245,20 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                 type="button"
                 onClick={() => onChange({ ...profile, age: Math.min(100, profile.age + 1) })}
                 aria-label="வயதை 1 கூட்ட"
-                className="tactile-button w-14 h-14 rounded-full bg-white border-2 border-[#dfc0b7] text-[#a43716] flex items-center justify-center hover:bg-[#fbf2ed] shadow-sm font-black text-2xl"
+                className="tactile-button w-12 h-12 rounded-full bg-white border border-[#dfc0b7] text-[#a43716] flex items-center justify-center hover:bg-[#fbf2ed] shadow-xs font-black text-xl"
               >
-                <Plus className="w-6 h-6 stroke-[3]" />
+                <Plus className="w-5 h-5 stroke-[3]" />
               </button>
             </div>
 
             {/* Quick age bracket chips */}
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-1.5 mt-3">
               {[19, 25, 40, 60, 65].map((ageVal) => (
                 <button
                   key={ageVal}
                   type="button"
                   onClick={() => onChange({ ...profile, age: ageVal })}
-                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                  className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all border ${
                     profile.age === ageVal
                       ? 'bg-[#2b8282] text-white border-[#2b8282]'
                       : 'bg-white text-[#58423c] border-[#dfc0b7] hover:bg-[#f5ece7]'
@@ -270,11 +271,11 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
           </div>
 
           {/* Marital / Family condition */}
-          <div className="bg-[#fff8f5] p-5 rounded-2xl border-2 border-[#dfc0b7]">
-            <label className="block text-sm sm:text-base font-bold text-[#1f1b18] mb-3">
-              குடும்ப நிலை (Family / Marital Status):
+          <div className="bg-[#fff8f5] p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-[#dfc0b7]">
+            <label className="block text-xs sm:text-sm font-bold text-[#1f1b18] mb-2">
+              குடும்ப நிலை (Marital Status):
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {maritalOptions.map((opt) => {
                 const isSelected = profile.maritalStatus === opt.id;
                 return (
@@ -287,14 +288,14 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                         maritalStatus: isSelected ? 'any' : (opt.id as any),
                       })
                     }
-                    className={`tactile-button p-3 rounded-xl border-2 text-left text-xs sm:text-sm font-bold flex items-center justify-between transition-all ${
+                    className={`tactile-button p-2.5 rounded-xl border text-left text-xs font-bold flex items-center justify-between transition-all ${
                       isSelected
                         ? 'bg-[#2b8282] text-white border-[#006a6a]'
                         : 'bg-white text-[#1f1b18] border-[#dfc0b7] hover:bg-[#fbf2ed]'
                     }`}
                   >
                     <span>{opt.label}</span>
-                    {isSelected && <Check className="w-4 h-4 shrink-0" />}
+                    {isSelected && <Check className="w-3.5 h-3.5 shrink-0" />}
                   </button>
                 );
               })}
@@ -304,20 +305,20 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
       </section>
 
       {/* Step 3: Income Bracket */}
-      <section className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#eae1dc] shadow-sm">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-8 h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-sm border border-[#dfc0b7]">
+      <section className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border sm:border-2 border-[#eae1dc] shadow-xs sm:shadow-sm">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-xs sm:text-sm border border-[#dfc0b7] shrink-0">
             3
           </span>
-          <h2 className="text-xl sm:text-2xl font-black text-[#1f1b18]">
-            குடும்ப ஆண்டு வருமானம் (தோராயமாக)
+          <h2 className="text-base sm:text-xl font-black text-[#1f1b18] leading-tight">
+            குடும்ப ஆண்டு வருமானம்
           </h2>
         </div>
-        <p className="text-sm sm:text-base text-[#58423c] mb-6">
-          அரசு நலத்திட்டங்களுக்கு வருமான வரம்பு மிகவும் முக்கியம். உங்கள் வரம்பைத் தேர்ந்தெடுக்கவும்.
+        <p className="text-xs sm:text-sm text-[#58423c] mb-3 sm:mb-4">
+          அரசு நலத்திட்டங்களுக்கு வருமான வரம்பு மிக முக்கியம்.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3.5">
           {incomeTiers.map((tier) => {
             const isSelected = profile.annualIncome === tier.id;
             return (
@@ -325,15 +326,15 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                 key={tier.id}
                 type="button"
                 onClick={() => onChange({ ...profile, annualIncome: tier.id as any })}
-                className={`tactile-button p-5 rounded-2xl border-3 text-left transition-all flex flex-col justify-between min-h-[120px] ${
+                className={`tactile-button p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-left transition-all flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-[#2b8282] text-white border-[#006a6a] shadow-md'
+                    ? 'bg-[#2b8282] text-white border-[#006a6a] shadow-sm'
                     : 'bg-[#fff8f5] text-[#1f1b18] border-[#eae1dc] hover:border-[#dfc0b7] hover:bg-[#fbf2ed]'
                 }`}
               >
                 <div>
                   <span
-                    className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold mb-2 ${
+                    className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mb-1.5 ${
                       isSelected
                         ? 'bg-white/20 text-white'
                         : 'bg-[#fbf2ed] text-[#a43716] border border-[#dfc0b7]'
@@ -341,12 +342,12 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                   >
                     {tier.badgeTamil}
                   </span>
-                  <span className="block text-base font-extrabold leading-tight">
+                  <span className="block text-sm sm:text-base font-extrabold leading-snug">
                     {tier.titleTamil}
                   </span>
                 </div>
                 <span
-                  className={`block text-xs mt-2 ${
+                  className={`block text-[11px] mt-1.5 ${
                     isSelected ? 'text-white/80' : 'text-[#58423c]'
                   }`}
                 >
@@ -358,18 +359,18 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
         </div>
       </section>
 
-      {/* Step 4: Special Checkboxes (Big visual toggles) */}
-      <section className="bg-white rounded-3xl p-6 sm:p-8 border-2 border-[#eae1dc] shadow-sm">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-8 h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-sm border border-[#dfc0b7]">
+      {/* Step 4: Special Checkboxes */}
+      <section className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border sm:border-2 border-[#eae1dc] shadow-xs sm:shadow-sm">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fbf2ed] text-[#d95d39] font-black flex items-center justify-center text-xs sm:text-sm border border-[#dfc0b7] shrink-0">
             4
           </span>
-          <h2 className="text-xl sm:text-2xl font-black text-[#1f1b18]">
+          <h2 className="text-base sm:text-xl font-black text-[#1f1b18] leading-tight">
             கூடுதல் தகுதிகள் (பொருந்தினால் தொடவும்)
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 mt-3">
           {/* Govt School 6th to 12th */}
           <button
             type="button"
@@ -379,7 +380,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                 studiedGovtSchool: !profile.studiedGovtSchool,
               })
             }
-            className={`tactile-button p-4 rounded-2xl border-2 text-left text-sm font-bold flex items-center justify-between transition-all ${
+            className={`tactile-button p-3 rounded-xl border text-left text-xs sm:text-sm font-bold flex items-center justify-between transition-all ${
               profile.studiedGovtSchool
                 ? 'bg-[#2b8282] text-white border-[#006a6a]'
                 : 'bg-[#fff8f5] text-[#1f1b18] border-[#dfc0b7] hover:bg-[#fbf2ed]'
@@ -387,13 +388,13 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
           >
             <span>6 முதல் 12 ஆம் வகுப்பு அரசுப் பள்ளி படிப்பு</span>
             <div
-              className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center ${
+              className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ml-2 ${
                 profile.studiedGovtSchool
                   ? 'bg-white text-[#2b8282] border-white'
                   : 'bg-white border-[#8b716a]'
               }`}
             >
-              {profile.studiedGovtSchool && <Check className="w-4 h-4 stroke-[3]" />}
+              {profile.studiedGovtSchool && <Check className="w-3.5 h-3.5 stroke-[3]" />}
             </div>
           </button>
 
@@ -407,7 +408,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                   profile.occupation === 'farmer' ? 'other' : 'farmer',
               })
             }
-            className={`tactile-button p-4 rounded-2xl border-2 text-left text-sm font-bold flex items-center justify-between transition-all ${
+            className={`tactile-button p-3 rounded-xl border text-left text-xs sm:text-sm font-bold flex items-center justify-between transition-all ${
               profile.occupation === 'farmer' || profile.occupation === 'agricultural_labor'
                 ? 'bg-[#2b8282] text-white border-[#006a6a]'
                 : 'bg-[#fff8f5] text-[#1f1b18] border-[#dfc0b7] hover:bg-[#fbf2ed]'
@@ -415,14 +416,14 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
           >
             <span>விவசாயம் அல்லது கூலி வேலை செய்பவர்</span>
             <div
-              className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center ${
+              className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ml-2 ${
                 profile.occupation === 'farmer' || profile.occupation === 'agricultural_labor'
                   ? 'bg-white text-[#2b8282] border-white'
                   : 'bg-white border-[#8b716a]'
               }`}
             >
               {(profile.occupation === 'farmer' || profile.occupation === 'agricultural_labor') && (
-                <Check className="w-4 h-4 stroke-[3]" />
+                <Check className="w-3.5 h-3.5 stroke-[3]" />
               )}
             </div>
           </button>
@@ -436,7 +437,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
                 hasDaughterMarriageSoon: !profile.hasDaughterMarriageSoon,
               })
             }
-            className={`tactile-button p-4 rounded-2xl border-2 text-left text-sm font-bold flex items-center justify-between transition-all ${
+            className={`tactile-button p-3 rounded-xl border text-left text-xs sm:text-sm font-bold flex items-center justify-between transition-all ${
               profile.hasDaughterMarriageSoon
                 ? 'bg-[#2b8282] text-white border-[#006a6a]'
                 : 'bg-[#fff8f5] text-[#1f1b18] border-[#dfc0b7] hover:bg-[#fbf2ed]'
@@ -444,36 +445,36 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
           >
             <span>விரைவில் பெண் திருமணம் (திருமண உதவி)</span>
             <div
-              className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center ${
+              className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ml-2 ${
                 profile.hasDaughterMarriageSoon
                   ? 'bg-white text-[#2b8282] border-white'
                   : 'bg-white border-[#8b716a]'
               }`}
             >
-              {profile.hasDaughterMarriageSoon && <Check className="w-4 h-4 stroke-[3]" />}
+              {profile.hasDaughterMarriageSoon && <Check className="w-3.5 h-3.5 stroke-[3]" />}
             </div>
           </button>
         </div>
       </section>
 
-      {/* Giant CTA Action Button: Minimum 70px height, full pill contour */}
-      <div className="pt-2">
+      {/* Giant CTA Action Button */}
+      <div className="pt-1">
         <button
           type="button"
           onClick={onSubmit}
           disabled={isLoading}
           aria-label="உங்களுக்கு உகந்த அரசு நலத்திட்டங்களை அறிய இங்கே அழுத்தவும்"
-          className="w-full min-h-[72px] rounded-full bg-[#d95d39] hover:bg-[#a43716] text-white flex items-center justify-center gap-3 text-xl sm:text-2xl font-black shadow-xl tactile-button breathing-glow transition-all active:translate-y-1 disabled:opacity-50 border-4 border-white"
+          className="w-full min-h-[58px] sm:min-h-[68px] rounded-full bg-[#d95d39] hover:bg-[#a43716] text-white flex items-center justify-center gap-2.5 text-base sm:text-xl font-black shadow-lg tactile-button breathing-glow transition-all active:translate-y-1 disabled:opacity-50 border-3 border-white"
         >
           {isLoading ? (
-            <span className="flex items-center gap-3">
-              <Sparkles className="w-7 h-7 animate-spin" />
+            <span className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 animate-spin" />
               <span>மதிப்பீடு செய்கிறது...</span>
             </span>
           ) : (
-            <span className="flex items-center gap-3">
-              <Search className="w-7 h-7 stroke-[3]" />
-              <span>உங்களுக்கு உகந்த நலத்திட்டங்களைக் காணுங்கள்</span>
+            <span className="flex items-center gap-2">
+              <Search className="w-5 h-5 stroke-[3]" />
+              <span>நலத்திட்டங்களைக் கண்டறியுங்கள்</span>
             </span>
           )}
         </button>
