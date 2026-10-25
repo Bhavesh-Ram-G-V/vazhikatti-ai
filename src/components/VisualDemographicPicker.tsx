@@ -34,23 +34,22 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
 }) => {
   const primaryIdentities = [
     {
-      id: 'woman',
-      labelTamil: 'பெண் / குடும்பத் தலைவி',
-      subtextTamil: 'உரிமைத்தொகை, மகளிர் திட்டங்கள்',
+      id: 'head_of_family',
+      labelTamil: profile.gender === 'male' ? 'குடும்பத் தலைவர் (ஆண்)' : 'பெண் / குடும்பத் தலைவி',
+      subtextTamil: profile.gender === 'male' ? 'மருத்துவக் காப்பீடு, உழவர் பாதுகாப்பு' : 'உரிமைத்தொகை, மகளிர் திட்டங்கள்',
       icon: User,
       apply: (p: CitizenProfile) => ({
         ...p,
-        gender: 'female' as const,
         age: p.age < 21 ? 25 : p.age,
         isPregnant: false,
       }),
       isSelected: (p: CitizenProfile) =>
-        p.gender === 'female' && !p.isPregnant && p.occupation !== 'student_higher_edu' && p.age < 60,
+        !p.isPregnant && p.occupation !== 'student_higher_edu' && p.age < 60 && !p.isDifferentlyAbled && p.occupation !== 'farmer',
     },
     {
       id: 'elder',
       labelTamil: 'மூத்த குடிமக்கள் (60+ வயது)',
-      subtextTamil: 'முதியோர் ஓய்வூதியம், காப்பீடு',
+      subtextTamil: 'முதியோர் ஓய்வூதியம் (OAP), காப்பீடு',
       icon: HeartHandshake,
       apply: (p: CitizenProfile) => ({
         ...p,
@@ -60,8 +59,8 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
     },
     {
       id: 'student',
-      labelTamil: 'கல்லூரி மாணவி / மாணவர்',
-      subtextTamil: 'புதுமைப் பெண், தமிழ்ப் புதல்வன்',
+      labelTamil: profile.gender === 'male' ? 'கல்லூரி மாணவர் (தமிழ்ப் புதல்வன்)' : 'கல்லூரி மாணவி / மாணவர்',
+      subtextTamil: profile.gender === 'male' ? 'மாதம் ரூ. 1,000 தமிழ்ப் புதல்வன் திட்டம்' : 'புதுமைப் பெண், தமிழ்ப் புதல்வன்',
       icon: GraduationCap,
       apply: (p: CitizenProfile) => ({
         ...p,
@@ -76,7 +75,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
     {
       id: 'farmer',
       labelTamil: 'விவசாயி / விவசாயக் கூலி',
-      subtextTamil: 'உழவர் பாதுகாப்பு அட்டை திட்டம்',
+      subtextTamil: 'முதலமைச்சரின் உழவர் பாதுகாப்பு அட்டை திட்டம்',
       icon: Tractor,
       apply: (p: CitizenProfile) => ({
         ...p,
@@ -88,7 +87,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
     },
     {
       id: 'disabled',
-      labelTamil: 'மாற்றுத்திறனாளி',
+      labelTamil: 'மாற்றுத்திறனாளி (40%+)',
       subtextTamil: 'மாதாந்திர பராமரிப்பு உதவித்தொகை',
       icon: Accessibility,
       apply: (p: CitizenProfile) => ({
@@ -97,19 +96,23 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
       }),
       isSelected: (p: CitizenProfile) => p.isDifferentlyAbled === true,
     },
-    {
-      id: 'pregnant',
-      labelTamil: 'கர்ப்பிணித் தாய்',
-      subtextTamil: 'முத்துலட்சுமி ரெட்டி மகப்பேறு உதவி',
-      icon: Baby,
-      apply: (p: CitizenProfile) => ({
-        ...p,
-        gender: 'female' as const,
-        age: p.age < 19 ? 24 : p.age,
-        isPregnant: true,
-      }),
-      isSelected: (p: CitizenProfile) => p.gender === 'female' && p.isPregnant === true,
-    },
+    ...(profile.gender !== 'male'
+      ? [
+          {
+            id: 'pregnant',
+            labelTamil: 'கர்ப்பிணித் தாய்',
+            subtextTamil: 'முத்துலட்சுமி ரெட்டி மகப்பேறு உதவி',
+            icon: Baby,
+            apply: (p: CitizenProfile) => ({
+              ...p,
+              gender: 'female' as const,
+              age: p.age < 19 ? 24 : p.age,
+              isPregnant: true,
+            }),
+            isSelected: (p: CitizenProfile) => p.gender === 'female' && p.isPregnant === true,
+          },
+        ]
+      : []),
   ];
 
   const incomeTiers = [
@@ -123,7 +126,7 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
       id: 'below_2_5_lakh',
       titleTamil: 'ரூ. 1 லட்சம் முதல் 2.5 லட்சம் வரை',
       badgeTamil: 'எளிய நடுத்தர குடும்பம்',
-      descTamil: 'மகளிர் உரிமைத்தொகை, இலவச காப்பீடு, மாணவர் கல்வி உதவி',
+      descTamil: 'மருத்துவக் காப்பீடு, மாணவர் கல்வி உதவி, உரிமைத்தொகை',
     },
     {
       id: 'above_2_5_lakh',
@@ -133,12 +136,19 @@ export const VisualDemographicPicker: React.FC<VisualDemographicPickerProps> = (
     },
   ];
 
-  const maritalOptions = [
-    { id: 'widow', label: 'விதவை / கணவரை இழந்தவர்' },
-    { id: 'destitute_widow', label: 'ஆதரவற்ற விதவை' },
-    { id: 'married', label: 'திருமணமானவர்' },
-    { id: 'unmarried', label: 'திருமணம் ஆகாதவர்' },
-  ];
+  const maritalOptions =
+    profile.gender === 'male'
+      ? [
+          { id: 'married', label: 'திருமணமானவர்' },
+          { id: 'unmarried', label: 'திருமணம் ஆகாதவர்' },
+          { id: 'widow', label: 'மனைவியை இழந்தவர் (Widower)' },
+        ]
+      : [
+          { id: 'widow', label: 'விதவை / கணவரை இழந்தவர்' },
+          { id: 'destitute_widow', label: 'ஆதரவற்ற விதவை' },
+          { id: 'married', label: 'திருமணமானவர்' },
+          { id: 'unmarried', label: 'திருமணம் ஆகாதவர்' },
+        ];
 
   return (
     <div className="w-full space-y-4 sm:space-y-6">

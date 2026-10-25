@@ -130,6 +130,7 @@ export const TN_SCHEMES: Scheme[] = [
     officeToContactTamil: 'வட்டாட்சியர் அலுவலகம் (சமூகப் பாதுகாப்புத் திட்டம்) / e-Seva மையம்',
     helpline: '1100 (முதலமைச்சர் உதவி எண்)',
     checkEligibility: (p) => {
+      if (p.gender === 'male') return false;
       const isWidow = p.maritalStatus === 'widow' || p.maritalStatus === 'destitute_widow';
       const isAdult = p.age >= 18;
       const isLowIncome = p.annualIncome === 'below_1_lakh';
@@ -276,9 +277,36 @@ export const TN_SCHEMES: Scheme[] = [
     officeToContactTamil: 'வட்டார வளர்ச்சி அலுவலகம் (BDO) / மாவட்ட சமூக நல அலுவலகம்',
     helpline: '181 (பெண்கள் உதவி மையம்)',
     checkEligibility: (p) => {
+      if (p.gender === 'male' && !p.hasDaughterMarriageSoon) return false;
       const isLowIncome = p.annualIncome === 'below_1_lakh';
       const isApplicable = p.hasDaughterMarriageSoon === true || (p.gender === 'female' && p.age >= 18 && p.age <= 30 && p.maritalStatus === 'unmarried');
       return isLowIncome && isApplicable;
+    },
+  },
+  {
+    id: 'transgender_pension',
+    nameTamil: 'தமிழ்நாடு திருநங்கைகள் மாதாந்திர ஓய்வூதியத் திட்டம்',
+    nameEnglish: 'Tamil Nadu Transgender Pension Scheme',
+    benefitDescriptionTamil: '40 வயதுக்கு மேற்பட்ட ஆதரவற்ற திருநங்கைகளுக்கு மாதம் ரூ. 1,000 சமூகப் பாதுகாப்பு ஓய்வூதியம் வழங்கப்படுகிறது.',
+    category: 'social_security',
+    amountTamil: 'ரூ. 1,000 / மாதம்',
+    documentsTamil: [
+      'தமிழ்நாடு திருநங்கைகள் நல வாரிய அடையாள அட்டை (Transgender ID Card)',
+      'ஸ்மார்ட் குடும்ப அட்டை',
+      'வருமானச் சான்றிதழ் மற்றும் வயதுச் சான்று',
+      'வங்கிக் கணக்கு புத்தகம்',
+    ],
+    nextStepsTamil: [
+      'தமிழ்நாடு திருநங்கைகள் நல வாரிய அடையாள அட்டையுடன் மாவட்ட சமூக நல அலுவலகத்தை அணுகவும்.',
+      'e-Seva மையம் மூலம் சமூகப் பாதுகாப்பு ஓய்வூதியத்திற்கு விண்ணப்பிக்கவும்.',
+    ],
+    officeToContactTamil: 'மாவட்ட சமூக நல அலுவலகம் / வட்டாட்சியர் அலுவலகம்',
+    helpline: '181 / 1100',
+    checkEligibility: (p) => {
+      const isTrans = p.gender === 'transgender';
+      const isAge = p.age >= 40;
+      const isLowIncome = p.annualIncome === 'below_1_lakh';
+      return isTrans && isAge && isLowIncome;
     },
   },
 ];

@@ -121,3 +121,40 @@ test('FormatEvaluationOutput follows prompt markdown template strictly', () => {
   assert.ok(formatted.includes('⚠️ **முக்கிய குறிப்பு (Disclaimer)**'));
   assert.ok(formatted.includes('இது ஒரு வழிகாட்டி தகவல் மட்டுமே.'));
 });
+
+test('When gender is male (ஆண்), female-only schemes are strictly filtered out and male-eligible schemes are returned', () => {
+  const maleFarmer: CitizenProfile = {
+    age: 45,
+    gender: 'male',
+    annualIncome: 'below_1_lakh',
+    occupation: 'farmer',
+    isDifferentlyAbled: true,
+  };
+
+  const schemes = evaluateEligibility(maleFarmer);
+  const ids = schemes.map((s) => s.id);
+
+  // Strictly excluded female-only schemes
+  assert.ok(!ids.includes('kmuy'), 'Kalaignar Magalir Urimai Thittam must NOT be eligible for male');
+  assert.ok(!ids.includes('pudhumai_penn'), 'Pudhumai Penn must NOT be eligible for male');
+  assert.ok(!ids.includes('destitute_widow_pension'), 'Widow pension must NOT be eligible for male');
+  assert.ok(!ids.includes('muthulakshmi_maternity'), 'Maternity assistance must NOT be eligible for male');
+
+  // Included male-eligible schemes
+  assert.ok(ids.includes('uzhavar_padhukappu'), 'Uzhavar Padhukappu Thittam must be eligible for male farmer');
+  assert.ok(ids.includes('cmchis'), 'CMCHIS must be eligible for male low-income citizen');
+  assert.ok(ids.includes('differently_abled_pension'), 'Differently abled pension must be eligible for male');
+});
+
+test('Transgender pension for transgender citizen aged 45', () => {
+  const transProfile: CitizenProfile = {
+    age: 45,
+    gender: 'transgender',
+    annualIncome: 'below_1_lakh',
+  };
+
+  const schemes = evaluateEligibility(transProfile);
+  const transScheme = schemes.find((s) => s.id === 'transgender_pension');
+  assert.ok(transScheme, 'Transgender citizen should be eligible for transgender pension');
+});
+
