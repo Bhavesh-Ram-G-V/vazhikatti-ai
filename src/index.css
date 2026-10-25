@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Atkinson Hyperlegible', 'Noto Sans Tamil', system-ui, -apple-system, sans-serif;
+    background-color: #fff8f5;
+    color: #1f1b18;
+    letter-spacing: 0.015em;
+  }
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(217, 93, 57, 0.35), 0 0 0 7px rgba(217, 93, 57, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(217, 93, 57, 0.4), 0 0 0 18px rgba(217, 93, 57, 0.12);
+  }
+}
+
+@keyframes breathingTealGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(43, 130, 130, 0.35), 0 0 0 7px rgba(43, 130, 130, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(43, 130, 130, 0.4), 0 0 0 18px rgba(43, 130, 130, 0.12);
+  }
+}
+
+.breathing-glow {
+  animation: breathingGlow 3.5s ease-in-out infinite;
+}
+
+.breathing-teal-glow {
+  animation: breathingTealGlow 3.5s ease-in-out infinite;
+}
+
+.tactile-button {
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactile-button:active {
+  transform: translateY(3px);
+  filter: brightness(0.96);
+}

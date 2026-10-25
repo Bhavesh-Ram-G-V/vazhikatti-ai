@@ -1,0 +1,7 @@
+{
+  "name": "Vazhikatti AI (வழிகாட்டி)",
+  "description": "தமிழ்நாடு குடிமக்களுக்கான பூஜ்ஜிய-டிஜிட்டல் அறிவு நலத்திட்ட வழிகாட்டி இயந்திரம்.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
